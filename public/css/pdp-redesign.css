@@ -1,0 +1,771 @@
+/* ===============================================
+   ECOO21 — PRODUCT DETAIL PAGE REDESIGN
+   Human-crafted, visually refined styling
+   Created for better visual hierarchy and polish
+=============================================== */
+
+/* ===============================================
+   MAIN CONTAINER & LAYOUT
+=============================================== */
+.product-page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 32px 100px;
+    background: transparent;
+    position: relative;
+}
+
+/* Subtle background glow */
+.product-page-container::before {
+    content: '';
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 800px;
+    height: 350px;
+    background: radial-gradient(ellipse at center, rgba(251, 191, 36, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ===============================================
+   BACK LINK - Modern with micro-interaction
+=============================================== */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #78350f;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 40px;
+    padding: 12px 22px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50px;
+    border: 1px solid rgba(180, 83, 9, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
+    backdrop-filter: blur(10px);
+}
+
+.back-link:hover {
+    background: rgba(255, 255, 255, 0.98);
+    transform: translateX(-8px);
+    box-shadow: 0 8px 28px rgba(180, 83, 9, 0.18);
+    border-color: rgba(180, 83, 9, 0.2);
+}
+
+.back-link svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+}
+
+.back-link:hover svg {
+    transform: translateX(-3px);
+}
+
+/* ===============================================
+   PRODUCT SHOWCASE - Asymmetric refined layout
+=============================================== */
+.product-showcase {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===============================================
+   PRODUCT IMAGE - Floating effect with gradient border
+=============================================== */
+.product-visual {
+    position: sticky;
+    top: 110px;
+}
+
+.image-frame {
+    position: relative;
+    border-radius: 32px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.02),
+        0 12px 28px rgba(0, 0, 0, 0.06),
+        0 32px 64px rgba(0, 0, 0, 0.08);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Gradient border effect */
+.image-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 32px;
+    padding: 2.5px;
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.5), rgba(239, 68, 68, 0.2), rgba(245, 158, 11, 0.35));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Corner accent badge */
+.image-frame::after {
+    content: '';
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #fbbf24, #f97316);
+    border-radius: 50%;
+    z-index: 11;
+    box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
+}
+
+.image-frame:hover {
+    transform: translateY(-6px);
+    box-shadow: 
+        0 12px 24px rgba(0, 0, 0, 0.04),
+        0 32px 56px rgba(0, 0, 0, 0.08),
+        0 56px 100px rgba(0, 0, 0, 0.06);
+}
+
+.main-product-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-frame:hover .main-product-image {
+    transform: scale(1.05);
+}
+
+.image-accent {
+    position: absolute;
+    top: -25%;
+    right: -15%;
+    width: 55%;
+    height: 55%;
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ===============================================
+   PRODUCT DETAILS - Card container style
+=============================================== */
+.product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 44px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(14px);
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.02),
+        0 16px 32px rgba(0, 0, 0, 0.04);
+}
+
+/* ===============================================
+   BREADCRUMB - Modern pill style
+=============================================== */
+.breadcrumb-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    flex-wrap: wrap;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    margin-bottom: 4px;
+}
+
+.breadcrumb-nav a {
+    color: #92400e;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: rgba(251, 191, 36, 0.08);
+}
+
+.breadcrumb-nav a:hover {
+    color: #b45309;
+    background: rgba(251, 191, 36, 0.18);
+}
+
+.breadcrumb-nav .separator {
+    color: #d6d3d1;
+    font-weight: 300;
+    font-size: 18px;
+}
+
+.breadcrumb-nav .current {
+    color: #78716c;
+    font-weight: 400;
+    padding: 5px 12px;
+}
+
+/* ===============================================
+   CATEGORY TAG - Floating badge with shine
+=============================================== */
+.category-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 
+        0 4px 10px rgba(245, 158, 11, 0.32),
+        0 8px 20px rgba(245, 158, 11, 0.22);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shine sweep animation */
+.category-tag::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transition: left 0.6s ease;
+}
+
+.category-tag:hover::before {
+    left: 100%;
+}
+
+/* ===============================================
+   PRODUCT NAME - Bold typography with accent
+=============================================== */
+.product-name {
+    font-size: 46px;
+    font-weight: 800;
+    color: #1c1917;
+    line-height: 1.08;
+    letter-spacing: -1.2px;
+    margin: 0;
+    position: relative;
+}
+
+/* Decorative gradient line */
+.product-name::after {
+    content: '';
+    display: block;
+    width: 90px;
+    height: 5px;
+    background: linear-gradient(90deg, #fbbf24, #f97316, #ef4444);
+    margin-top: 22px;
+    border-radius: 3px;
+}
+
+/* ===============================================
+   PRICE DISPLAY - Premium card style
+=============================================== */
+.price-display {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 30px 34px;
+    background: 
+        linear-gradient(135deg, rgba(249, 115, 22, 0.06) 0%, rgba(245, 158, 11, 0.04) 100%),
+        rgba(255, 255, 255, 0.7);
+    border-radius: 24px;
+    border: 1px solid rgba(245, 158, 11, 0.12);
+    backdrop-filter: blur(14px);
+    box-shadow: 
+        0 4px 14px rgba(249, 115, 22, 0.08),
+        0 8px 28px rgba(249, 115, 22, 0.06);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Top gradient line */
+.price-display::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #fbbf24, #f97316, #ef4444);
+}
+
+.price-amount {
+    font-size: 46px;
+    font-weight: 800;
+    color: #ea580c;
+    letter-spacing: -2.5px;
+    line-height: 1;
+    position: relative;
+}
+
+.price-amount::before {
+    content: 'Rp';
+    font-size: 22px;
+    font-weight: 600;
+    margin-right: 6px;
+    opacity: 0.8;
+}
+
+.price-note {
+    font-size: 13px;
+    color: #059669;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(245, 158, 11, 0.18);
+}
+
+.price-note::before {
+    content: '✓';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: #059669;
+    color: white;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* ===============================================
+   PRODUCT DESCRIPTION - Clean with accent
+=============================================== */
+.product-description {
+    padding: 26px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.04);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.product-description h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #57534e;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    margin-bottom: 14px;
+    position: relative;
+    display: inline-block;
+}
+
+.product-description h3::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 32px;
+    height: 2px;
+    background: linear-gradient(90deg, #f59e0b, #ef4444);
+    border-radius: 1px;
+}
+
+.product-description p {
+    color: #44403c;
+    line-height: 1.65;
+    font-size: 14px;
+    margin: 0;
+}
+
+.product-description p.is-collapsed {
+    max-height: 180px;
+    overflow: hidden;
+    position: relative;
+}
+
+.product-description p.is-collapsed::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 44px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+    pointer-events: none;
+}
+
+.product-description p.is-expanded {
+    max-height: none;
+}
+
+.description-toggle-btn {
+    margin-top: 10px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #b45309;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.description-toggle-btn:hover {
+    color: #92400e;
+    text-decoration: underline;
+}
+
+/* ===============================================
+   FEATURES LIST - Refined with hover effects
+=============================================== */
+.features-list {
+    padding: 0;
+}
+
+.features-list h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #57534e;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    margin-bottom: 18px;
+    position: relative;
+    display: inline-block;
+}
+
+.features-list h3::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 32px;
+    height: 2px;
+    background: linear-gradient(90deg, #f59e0b, #ef4444);
+    border-radius: 1px;
+}
+
+.features-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.features-list li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: #57534e;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.55);
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    transition: all 0.35s ease;
+}
+
+.features-list li:hover {
+    background: rgba(255, 255, 255, 0.92);
+    transform: translateX(5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+}
+
+.check-icon {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    box-shadow: 0 3px 10px rgba(16, 185, 129, 0.28);
+}
+
+/* ===============================================
+   PURCHASE SECTION - Floating card
+=============================================== */
+.purchase-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.88);
+    border-radius: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(18px);
+    box-shadow: 
+        0 4px 10px rgba(0, 0, 0, 0.03),
+        0 18px 36px rgba(0, 0, 0, 0.06);
+    flex-wrap: wrap;
+}
+
+.quantity-control {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.qty-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #78716c;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+.qty-wrapper {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.04),
+        0 6px 14px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.qty-wrapper .qty-btn {
+    width: 54px;
+    height: 54px;
+    border: none;
+    background: #fafaf9;
+    color: #44403c;
+    font-size: 22px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.qty-wrapper .qty-btn:hover {
+    background: linear-gradient(135deg, #f59e0b, #f97316);
+    color: white;
+    transform: scale(1.06);
+}
+
+.qty-wrapper .qty-btn:active {
+    transform: scale(0.96);
+}
+
+.qty-wrapper input {
+    width: 70px;
+    height: 54px;
+    border: none;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1c1917;
+    background: white;
+}
+
+.qty-wrapper input::-webkit-outer-spin-button,
+.qty-wrapper input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.total-display {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.total-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #78716c;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.total-amount {
+    font-size: 38px;
+    font-weight: 800;
+    color: #ea580c;
+    letter-spacing: -1.8px;
+}
+
+.total-amount span {
+    font-size: inherit;
+}
+
+/* ===============================================
+   CTA BUTTONS - Modern with glow effects
+=============================================== */
+.cta-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 6px;
+}
+
+.btn-primary-action,
+.btn-secondary-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shine sweep effect */
+.btn-primary-action::before,
+.btn-secondary-action::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transition: left 0.7s ease;
+}
+
+.btn-primary-action:hover::before,
+.btn-secondary-action:hover::before {
+    left: 100%;
+}
+
+/* WhatsApp Button */
+.wa-btn {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white;
+    box-shadow: 
+        0 6px 18px rgba(37, 211, 102, 0.32),
+        0 14px 32px rgba(37, 211, 102, 0.22);
+}
+
+.wa-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 14px 28px rgba(37, 211, 102, 0.38),
+        0 28px 56px rgba(37, 211, 102, 0.26);
+}
+
+/* Tokopedia Button */
+.tokped-btn {
+    background: linear-gradient(135deg, #2AAC4E 0%, #1E7E34 100%);
+    color: white;
+    box-shadow: 
+        0 6px 18px rgba(42, 172, 78, 0.32),
+        0 14px 32px rgba(42, 172, 78, 0.22);
+}
+
+.tokped-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 14px 28px rgba(42, 172, 78, 0.38),
+        0 28px 56px rgba(42, 172, 78, 0.26);
+}
+
+/* ===============================================
+   RESPONSIVE STYLES
+=============================================== */
+@media (max-width: 1024px) {
+    .product-showcase {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+    
+    .product-visual {
+        position: relative;
+        top: 0;
+        max-width: 520px;
+        margin: 0 auto;
+    }
+    
+    .product-name {
+        font-size: 38px;
+    }
+    
+    .price-amount {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-page-container {
+        padding: 40px 20px 60px;
+    }
+    
+    .product-details {
+        padding: 32px 24px;
+    }
+    
+    .product-name {
+        font-size: 30px;
+    }
+    
+    .price-amount {
+        font-size: 30px;
+    }
+    
+    .cta-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .purchase-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .total-display {
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-page-container {
+        padding: 24px 16px 50px;
+    }
+    
+    .product-name {
+        font-size: 26px;
+    }
+    
+    .price-amount {
+        font-size: 26px;
+    }
+    
+    .price-amount::before {
+        font-size: 16px;
+    }
+    
+    .total-amount {
+        font-size: 28px;
+    }
+}
+

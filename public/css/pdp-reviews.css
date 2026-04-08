@@ -1,0 +1,541 @@
+/* ===============================================
+   ECOO21 — REVIEWS SECTION REDESIGN
+   Modern, human-crafted styling for product reviews
+=============================================== */
+
+/* ===============================================
+   REVIEWS AREA CONTAINER
+=============================================== */
+.reviews-area {
+    margin-top: 90px;
+    padding: 56px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.02),
+        0 16px 32px rgba(0, 0, 0, 0.04);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative corner accent */
+.reviews-area::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.reviews-area::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(239, 68, 68, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* Section Header */
+.section-header {
+    text-align: center;
+    margin-bottom: 48px;
+    position: relative;
+}
+
+.section-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1c1917;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+    position: relative;
+    display: inline-block;
+}
+
+/* Decorative underline */
+.section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #fbbf24, #f97316, #ef4444);
+    border-radius: 2px;
+}
+
+.review-count {
+    color: #78716c;
+    font-size: 15px;
+    margin-top: 16px;
+    font-weight: 500;
+}
+
+/* ===============================================
+   REVIEWS GRID - Modern card layout
+=============================================== */
+.reviews-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 48px;
+}
+
+/* ===============================================
+   REVIEW CARD - Human-crafted styling
+=============================================== */
+.review-card {
+    padding: 28px 30px;
+    background: white;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+/* Left accent bar */
+.review-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 20px;
+    bottom: 20px;
+    width: 4px;
+    background: linear-gradient(180deg, #fbbf24, #f97316);
+    border-radius: 0 4px 4px 0;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.review-card:hover {
+    box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.06),
+        0 16px 32px rgba(0, 0, 0, 0.04);
+    transform: translateX(4px);
+}
+
+.review-card:hover::before {
+    opacity: 1;
+}
+
+.review-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.reviewer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.reviewer-name {
+    font-weight: 600;
+    color: #1c1917;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Avatar placeholder with gradient */
+.reviewer-name::before {
+    content: '';
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #fbbf24, #f97316);
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.review-date {
+    font-size: 13px;
+    color: #a8a29e;
+    padding-left: 40px;
+}
+
+/* Star Rating */
+.review-stars {
+    display: flex;
+    gap: 3px;
+}
+
+.review-stars .star {
+    color: #e7e5e4;
+    font-size: 18px;
+    transition: all 0.2s ease;
+}
+
+.review-stars .star.active {
+    color: #fbbf24;
+    text-shadow: 0 2px 4px rgba(251, 191, 36, 0.3);
+}
+
+.review-stars .star:hover {
+    transform: scale(1.15);
+}
+
+/* Review Text */
+.review-text {
+    color: #57534e;
+    line-height: 1.8;
+    font-size: 15px;
+    margin: 0;
+    padding-left: 40px;
+    position: relative;
+}
+
+/* Quote icon */
+.review-text::before {
+    content: '"';
+    position: absolute;
+    left: 12px;
+    top: -8px;
+    font-size: 48px;
+    color: rgba(251, 191, 36, 0.15);
+    font-family: Georgia, serif;
+    line-height: 1;
+}
+
+/* ===============================================
+   NO REVIEWS STATE
+=============================================== */
+.no-reviews {
+    text-align: center;
+    padding: 52px 28px;
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.04) 0%, rgba(249, 115, 22, 0.04) 100%);
+    border-radius: 20px;
+    margin-bottom: 48px;
+    border: 2px dashed rgba(245, 158, 11, 0.2);
+}
+
+.no-reviews p {
+    color: #57534e;
+    font-size: 16px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.no-reviews span {
+    color: #a8a29e;
+    font-size: 14px;
+}
+
+/* ===============================================
+   REVIEW FORM AREA
+=============================================== */
+.review-form-area {
+    padding: 44px;
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.03) 0%, rgba(249, 115, 22, 0.03) 100%);
+    border-radius: 24px;
+    border: 2px dashed rgba(245, 158, 11, 0.18);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle pattern overlay */
+.review-form-area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.review-form-area h3 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    color: #1c1917;
+    margin-bottom: 32px;
+    letter-spacing: -0.3px;
+    position: relative;
+}
+
+.review-form-area h3::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, #fbbf24, #f97316);
+    margin: 14px auto 0;
+    border-radius: 2px;
+}
+
+/* Form Styling */
+.review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-field label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #78350f;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.form-field input,
+.form-field textarea {
+    padding: 16px 20px;
+    border: 2px solid rgba(245, 158, 11, 0.12);
+    border-radius: 14px;
+    font-size: 14px;
+    font-family: inherit;
+    color: #1c1917;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+    outline: none;
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
+    background: #fffbf7;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+    color: #a8a29e;
+}
+
+/* ===============================================
+   STAR RATING INPUT
+=============================================== */
+.star-rating-input {
+    display: flex;
+    gap: 10px;
+    padding: 14px;
+    background: white;
+    border-radius: 14px;
+    border: 2px solid rgba(245, 158, 11, 0.12);
+    width: fit-content;
+    transition: all 0.3s ease;
+}
+
+.star-rating-input:focus-within {
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
+}
+
+.star-rating-input input[type="radio"] {
+    display: none;
+}
+
+.star-btn {
+    font-size: 32px;
+    color: #e7e5e4;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    padding: 4px;
+    line-height: 1;
+}
+
+.star-rating-input input[type="radio"]:checked + .star-btn {
+    color: #fbbf24;
+    transform: scale(1.2);
+}
+
+.star-btn:hover {
+    color: #fbbf24;
+    transform: scale(1.15);
+}
+
+/* ===============================================
+   SUBMIT BUTTON
+=============================================== */
+.submit-btn {
+    align-self: center;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    padding: 18px 56px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 6px 20px rgba(245, 158, 11, 0.32),
+        0 12px 28px rgba(245, 158, 11, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shine effect */
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.submit-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 
+        0 12px 28px rgba(245, 158, 11, 0.38),
+        0 24px 48px rgba(245, 158, 11, 0.26);
+}
+
+.submit-btn:hover::before {
+    left: 100%;
+}
+
+.submit-btn:active {
+    transform: translateY(-2px);
+}
+
+/* ===============================================
+   NOTIFICATION MESSAGES
+=============================================== */
+.notification {
+    padding: 18px 22px;
+    border-radius: 14px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    animation: slideInDown 0.4s ease;
+}
+
+.notification.success {
+    background: rgba(5, 150, 105, 0.08);
+    border: 2px solid rgba(5, 150, 105, 0.2);
+    color: #047857;
+}
+
+.notification.error {
+    background: rgba(239, 68, 68, 0.08);
+    border: 2px solid rgba(239, 68, 68, 0.2);
+    color: #dc2626;
+}
+
+.notification ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+/* ===============================================
+   RESPONSIVE STYLES
+=============================================== */
+@media (max-width: 1024px) {
+    .reviews-area {
+        padding: 44px 32px;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .reviews-area {
+        padding: 36px 20px;
+        margin-top: 60px;
+    }
+    
+    .section-header h2 {
+        font-size: 26px;
+    }
+    
+    .review-card {
+        padding: 22px 20px;
+    }
+    
+    .review-text {
+        padding-left: 20px;
+        font-size: 14px;
+    }
+    
+    .review-text::before {
+        display: none;
+    }
+    
+    .review-date {
+        padding-left: 0;
+    }
+    
+    .review-form-area {
+        padding: 32px 20px;
+    }
+    
+    .review-form-area h3 {
+        font-size: 22px;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .submit-btn {
+        width: 100%;
+        padding: 16px 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .reviews-area {
+        padding: 28px 16px;
+        margin-top: 48px;
+    }
+    
+    .section-header h2 {
+        font-size: 22px;
+    }
+    
+    .review-head {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .review-card {
+        padding: 18px 16px;
+    }
+    
+    .review-form-area {
+        padding: 24px 16px;
+    }
+    
+    .star-rating-input {
+        gap: 6px;
+        padding: 10px;
+    }
+    
+    .star-btn {
+        font-size: 26px;
+    }
+}
+
