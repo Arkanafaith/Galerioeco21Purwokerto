@@ -25,8 +25,8 @@
     --shadow-card: 0 2px 16px rgba(0, 0, 0, 0.06);
     --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.14);
     --t: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    --product-card-bg: #f4e8d6;
-    --product-card-bg-hover: #faf2e7;
+    --product-card-bg: #e5cd8c;
+    --product-card-bg-hover: #edd49a;
     --product-card-border: rgba(200, 155, 100, 0.28);
     --product-card-border-hover: rgba(249, 115, 22, 0.38);
 }
