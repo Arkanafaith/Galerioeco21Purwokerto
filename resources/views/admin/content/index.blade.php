@@ -8,8 +8,10 @@
 </div>
 
 <p class="alert alert-info" style="margin-bottom: 1.5rem;">
-    Edit teks seluruh beranda di bawah. Semua <strong>gambar beranda</strong> dikelola di section <strong>Gambar beranda</strong>.
-    Link TikTok, WhatsApp, Tokopedia, dll. tetap di menu <strong>Pengaturan → Media Sosial</strong>.
+    Di sini Anda mengatur <strong>teks per section</strong> (hero, statistik, tentang kami, showcase, ikuti kami) dan
+    <strong>foto aset beranda</strong> (bukan foto produk). <strong>Foto hanya bisa diganti</strong> dengan upload baru — tidak bisa dihapus sampai kosong.
+    Bagian <strong>CTA</strong>, <strong>ulasan</strong>, dan <strong>judul kartu produk</strong> tidak di sini (punya alur sendiri / tetap di kode).
+    Link sosial: <strong>Pengaturan → Media Sosial</strong>.
 </p>
 
 @if(session('success'))
@@ -42,7 +44,7 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Key</th>
+                                <th>Item</th>
                                 <th>Type</th>
                                 <th>Preview</th>
                                 <th>Aksi</th>
@@ -52,7 +54,10 @@
                             @foreach($contents[$section] as $content)
                                 <tr>
                                     <td>
-                                        <strong>{{ $content->key }}</strong>
+                                        <strong>{{ $content->content_type === 'image' ? ($imageKeyLabels[$content->key] ?? $content->key) : $content->key }}</strong>
+                                        @if($content->content_type === 'image')
+                                            <br><small class="text-muted">{{ $content->key }}</small>
+                                        @endif
                                     </td>
                                     <td>
                                         <span class="badge badge-{{ $content->content_type }}">

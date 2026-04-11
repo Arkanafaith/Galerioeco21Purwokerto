@@ -8,7 +8,7 @@ use App\Helpers\ContentHelper;
 
 @section('content')
 <div class="edit-header">
-    <h1>Edit Konten: {{ $siteContent->key }}</h1>
+    <h1>Edit: {{ $imageKeyLabel ?? $siteContent->key }}</h1>
     <a href="{{ route('admin.content.index') }}" class="btn btn-secondary">← Kembali</a>
 </div>
 
@@ -55,9 +55,9 @@ use App\Helpers\ContentHelper;
             </div>
 
             <div class="form-group">
-                <label for="image">Upload Gambar Baru</label>
+                <label for="image">Ganti foto (wajib pilih file untuk menyimpan perubahan)</label>
                 <input type="file" id="image" name="image" class="form-control" accept="image/*">
-                <small>Format: JPG, PNG, WebP. Maksimal 5MB. Kosongkan jika tidak ingin mengganti gambar.</small>
+                <small>Foto di beranda <strong>tidak bisa dihapus</strong> — hanya <strong>diganti</strong> dengan unggahan baru. JPG, PNG, WebP, maks. 5MB.</small>
             </div>
         @else
             <div class="form-group">

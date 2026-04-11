@@ -316,119 +316,6 @@ class SiteContentSeeder extends Seeder
             ]
         );
 
-        // Produk (judul section di beranda)
-        SiteContent::firstOrCreate(
-            ['key' => 'products_best_badge'],
-            [
-                'content_type' => 'text',
-                'content' => 'The Best Product',
-                'section' => 'products',
-                'order' => 1,
-            ]
-        );
-
-        SiteContent::firstOrCreate(
-            ['key' => 'products_best_title'],
-            [
-                'content_type' => 'textarea',
-                'content' => "3 Produk\nTerbaik Kami",
-                'section' => 'products',
-                'order' => 2,
-            ]
-        );
-
-        SiteContent::firstOrCreate(
-            ['key' => 'products_all_badge'],
-            [
-                'content_type' => 'text',
-                'content' => 'PRODUCTS',
-                'section' => 'products',
-                'order' => 3,
-            ]
-        );
-
-        SiteContent::firstOrCreate(
-            ['key' => 'products_all_title'],
-            [
-                'content_type' => 'text',
-                'content' => 'Buah tangan khas Banyumas',
-                'section' => 'products',
-                'order' => 4,
-            ]
-        );
-
-        SiteContent::firstOrCreate(
-            ['key' => 'products_category_label'],
-            [
-                'content_type' => 'text',
-                'content' => 'Makanan Tradisional',
-                'section' => 'products',
-                'order' => 5,
-            ]
-        );
-
-        // Testimonial / ulasan di beranda
-        SiteContent::firstOrCreate(
-            ['key' => 'testimonial_form_title'],
-            [
-                'content_type' => 'text',
-                'content' => 'Tulis Ulasan Kamu',
-                'section' => 'testimonial',
-                'order' => 1,
-            ]
-        );
-
-        SiteContent::firstOrCreate(
-            ['key' => 'testimonial_form_subtitle'],
-            [
-                'content_type' => 'text',
-                'content' => 'Pendapatmu sangat berarti bagi kami.',
-                'section' => 'testimonial',
-                'order' => 2,
-            ]
-        );
-
-        // CTA Section
-        SiteContent::firstOrCreate(
-            ['key' => 'cta_title'],
-            [
-                'content_type' => 'text',
-                'content' => 'Cari oleh-oleh yang berkesan?',
-                'section' => 'cta',
-                'order' => 1,
-            ]
-        );
-
-        SiteContent::firstOrCreate(
-            ['key' => 'cta_subtitle'],
-            [
-                'content_type' => 'text',
-                'content' => 'Kami punya pilihan istimewa untuk dibawa pulang.',
-                'section' => 'cta',
-                'order' => 2,
-            ]
-        );
-
-        SiteContent::firstOrCreate(
-            ['key' => 'cta_whatsapp_link'],
-            [
-                'content_type' => 'text',
-                'content' => 'https://wa.me/628112648830?text=Halo%20Galeri%20Eco%2021',
-                'section' => 'cta',
-                'order' => 3,
-            ]
-        );
-
-        SiteContent::firstOrCreate(
-            ['key' => 'cta_tokopedia_link'],
-            [
-                'content_type' => 'text',
-                'content' => 'https://www.tokopedia.com/tokoeco21',
-                'section' => 'cta',
-                'order' => 4,
-            ]
-        );
-
         // Ikuti kami (teks saja; link tetap dari Pengaturan Media Sosial)
         SiteContent::firstOrCreate(
             ['key' => 'follow_section_heading'],
@@ -448,7 +335,6 @@ class SiteContentSeeder extends Seeder
             'about_image_2' => 'images/toko/foto2.jpg',
             'showcase_image' => 'images/toko/foto4.jpg',
             'social_follow_image' => 'images/toko/foto_depan_toko.jpg',
-            'testimonial_image' => 'images/toko/foto6.png',
         ] as $key => $path) {
             SiteContent::firstOrCreate(
                 ['key' => $key],

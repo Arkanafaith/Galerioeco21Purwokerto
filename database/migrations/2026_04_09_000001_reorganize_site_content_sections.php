@@ -17,7 +17,6 @@ return new class extends Migration
             'about_image_2',
             'showcase_image',
             'social_follow_image',
-            'testimonial_image',
         ];
 
         DB::table('site_content')->whereIn('key', $homepageImages)->update(['section' => 'gambar_beranda']);

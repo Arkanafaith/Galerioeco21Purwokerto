@@ -176,8 +176,8 @@ $products = \App\Models\Product::all();
 <!-- Best Products Section -->
 <section class="best-products" id="produk">
     <div class="container">
-        <span class="section-badge">{{ ContentHelper::get('products_best_badge', 'The Best Product') }}</span>
-        <h2 class="section-title">{!! nl2br(e(ContentHelper::get('products_best_title', "3 Produk\nTerbaik Kami"))) !!}</h2>
+        <span class="section-badge">The Best Product</span>
+        <h2 class="section-title">3 Produk<br>Terbaik Kami</h2>
         
         <div class="products-grid">
             @foreach($topProducts as $product)
@@ -190,7 +190,7 @@ $products = \App\Models\Product::all();
                         @endif
                     </div>
                     <div class="product-info">
-                        <div class="product-category">{{ ContentHelper::get('products_category_label', 'Makanan Tradisional') }}</div>
+                        <div class="product-category">Makanan Tradisional</div>
                         <h3 class="product-name">{{ $product->name }}</h3>
                         <div class="product-rating">
                             <span class="stars">★★★★★</span>
@@ -206,8 +206,8 @@ $products = \App\Models\Product::all();
 <!-- All Products Section -->
 <section class="all-products">
     <div class="container">
-        <span class="section-badge">{{ ContentHelper::get('products_all_badge', 'PRODUCTS') }}</span>
-        <h2 class="section-title">{{ ContentHelper::get('products_all_title', 'Buah tangan khas Banyumas') }}</h2>
+        <span class="section-badge">PRODUCTS</span>
+        <h2 class="section-title">Buah tangan khas Banyumas</h2>
         
         <div class="products-grid-4" id="allProductsGrid">
             @forelse($products as $product)
@@ -379,8 +379,8 @@ $products = \App\Models\Product::all();
         <div class="testimonial-grid">
             <!-- Form Ulasan -->
             <div class="testimonial-form-card">
-                <h2>{{ ContentHelper::get('testimonial_form_title', 'Tulis Ulasan Kamu') }}</h2>
-                <p>{{ ContentHelper::get('testimonial_form_subtitle', 'Pendapatmu sangat berarti bagi kami.') }}</p>
+                <h2>Tulis Ulasan Kamu</h2>
+                <p>Pendapatmu sangat berarti bagi kami.</p>
                 
                 <form action="#" method="POST">
                     <div class="form-row">
@@ -422,7 +422,7 @@ $products = \App\Models\Product::all();
             
             <!-- Image Display -->
             <div class="testimonial-image">
-                <img src="{{ ContentHelper::getImage('testimonial_image', asset('images/toko/foto6.png')) }}" alt="Display Produk">
+                <img src="{{ asset('images/toko/foto6.png') }}" alt="Display Produk">
             </div>
         </div>
     </div>
@@ -432,11 +432,11 @@ $products = \App\Models\Product::all();
 <section class="cta-section" id="kontak">
     <div class="container">
         <div class="cta-overlay">
-            <h2>{{ ContentHelper::get('cta_title', 'Cari oleh-oleh yang berkesan?') }}</h2>
-            <p>{{ ContentHelper::get('cta_subtitle', 'Kami punya pilihan istimewa untuk dibawa pulang.') }}</p>
+            <h2>Cari oleh-oleh yang berkesan?</h2>
+            <p>Kami punya pilihan istimewa untuk dibawa pulang.</p>
             
             <div class="cta-buttons">
-                <a href="{{ ContentHelper::get('cta_whatsapp_link', 'https://wa.me/628112648830?text=Halo%20Galeri%20Eco%2021') }}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+                <a href="https://wa.me/628112648830?text=Halo%20Galeri%20Eco%2021" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
                     <img class="btn-icon" src="{{ asset('images/icon/whatsapp.png') }}" alt="WhatsApp">
                     WhatsApp
                 </a>
@@ -444,7 +444,7 @@ $products = \App\Models\Product::all();
                     <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 6h-2c0-2.21-1.79-4-4-4s-4 1.79-4 4H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-8 0c0-1.1.9-2 2-2s2 .9 2 2h-4zm6 14H6V8h2v2c0 .55.45 1 1 1s1-.45 1-1V8h8v12z"/></svg>
                     Shopee
                 </a>
-                <a href="{{ ContentHelper::get('cta_tokopedia_link', 'https://www.tokopedia.com/tokoeco21') }}" target="_blank" rel="noopener noreferrer" class="btn-tokopedia">
+                <a href="https://www.tokopedia.com/tokoeco21" target="_blank" rel="noopener noreferrer" class="btn-tokopedia">
                     <img class="btn-icon" src="{{ asset('images/icon/tokopedia.png') }}" alt="Tokopedia">
                     Tokopedia
                 </a>
