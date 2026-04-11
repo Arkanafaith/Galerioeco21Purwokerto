@@ -5,101 +5,25 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\SiteContent;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 
 class SiteContentController extends Controller
 {
-    /**
-     * Section yang muncul di Kelola Konten (teks + gambar beranda).
-     * Bukan: CTA, ulasan, judul/kategori kartu produk, link sosial (halaman terpisah).
-     */
-    private const CMS_SECTIONS = [
-        'hero',
-        'stats',
-        'about',
-        'showcase',
-        'advantages',
-        'follow',
-        'gambar_beranda',
-    ];
-
-    /** Gambar beranda yang boleh diganti admin (bukan foto produk / bukan ulasan). */
-    private const CMS_HOMEPAGE_IMAGE_KEYS = [
-        'hero_image',
-        'about_image_1',
-        'about_image_2',
-        'showcase_image',
-        'social_follow_image',
-    ];
-
-    private const SECTION_LABELS = [
-        'hero' => 'Hero (atas beranda)',
-        'stats' => 'Statistik',
-        'about' => 'Tentang kami',
-        'showcase' => 'Showcase — judul besar',
-        'advantages' => 'Showcase — accordion keunggulan',
-        'follow' => 'Section ikuti kami (teks)',
-        'gambar_beranda' => 'Gambar beranda (ganti foto)',
-    ];
-
-    private const IMAGE_KEY_LABELS = [
-        'hero_image' => 'Foto hero (besar di kanan)',
-        'about_image_1' => 'Tentang kami — gambar kiri',
-        'about_image_2' => 'Tentang kami — gambar kanan',
-        'showcase_image' => 'Showcase — foto di kiri',
-        'social_follow_image' => 'Section ikuti kami — foto kanan',
-    ];
-
-    /**
-     * Apakah konten ini boleh diedit lewat Kelola Konten?
-     */
-    public static function isCmsManaged(SiteContent $content): bool
-    {
-        if ($content->section === 'social_links') {
-            return false;
-        }
-
-        if (in_array($content->section, ['cta', 'testimonial', 'products'], true)) {
-            return false;
-        }
-
-        if (! in_array($content->section, self::CMS_SECTIONS, true)) {
-            return false;
-        }
-
-        if ($content->content_type === 'image') {
-            return in_array($content->key, self::CMS_HOMEPAGE_IMAGE_KEYS, true);
-        }
-
-        return true;
-    }
-
     /**
      * Display all site content organized by sections
      */
     public function index()
     {
+        $sections = SiteContent::distinct()->pluck('section')->sort();
         $contents = [];
-        foreach (self::CMS_SECTIONS as $section) {
-            $query = SiteContent::query()
-                ->where('section', $section)
-                ->orderBy('order');
-
-            if ($section === 'gambar_beranda') {
-                $query->whereIn('key', self::CMS_HOMEPAGE_IMAGE_KEYS);
-            }
-
-            $rows = $query->get()->filter(fn (SiteContent $c) => self::isCmsManaged($c))->values();
-            if ($rows->isNotEmpty()) {
-                $contents[$section] = $rows;
-            }
+        
+        foreach ($sections as $section) {
+            $contents[$section] = SiteContent::getBySection($section);
         }
-
-        $sections = collect(array_keys($contents));
-        $sectionLabels = self::SECTION_LABELS;
-        $imageKeyLabels = self::IMAGE_KEY_LABELS;
-
-        return view('admin.content.index', compact('contents', 'sections', 'sectionLabels', 'imageKeyLabels'));
+        
+        // Force fresh data from database
+        \DB::enableQueryLog();
+        
+        return view('admin.content.index', compact('contents', 'sections'));
     }
 
     /**
@@ -107,16 +31,7 @@ class SiteContentController extends Controller
      */
     public function edit(SiteContent $content)
     {
-        if (! self::isCmsManaged($content)) {
-            abort(404);
-        }
-
-        return view('admin.content.edit', [
-            'siteContent' => $content,
-            'imageKeyLabel' => $content->content_type === 'image'
-                ? (self::IMAGE_KEY_LABELS[$content->key] ?? null)
-                : null,
-        ]);
+        return view('admin.content.edit', ['siteContent' => $content]);
     }
 
     /**
@@ -124,58 +39,48 @@ class SiteContentController extends Controller
      */
     public function show(SiteContent $content)
     {
-        return $this->edit($content);
+        return view('admin.content.edit', ['siteContent' => $content]);
     }
 
     /**
-     * Update content — gambar hanya bisa diganti (upload baru), tidak boleh dihapus / dikosongkan.
+     * Update content
      */
     public function update(Request $request, SiteContent $content)
     {
-        if (! self::isCmsManaged($content)) {
-            abort(404);
-        }
-
         $data = [];
 
+        // Validate based on content type
         if ($content->content_type === 'image') {
-            if (! $request->hasFile('image')) {
-                return redirect()
-                    ->route('admin.content.edit', $content)
-                    ->with('info', 'Gambar tidak diubah. Pilih file baru untuk mengganti foto — foto tidak boleh dihapus, hanya diganti.');
+            if ($request->hasFile('image')) {
+                $request->validate([
+                    'image' => 'required|image|max:2048',
+                ]);
+                
+                // Delete old image if exists
+                if ($content->image_path && file_exists(public_path($content->image_path))) {
+                    @unlink(public_path($content->image_path));
+                }
+
+                // Upload new image
+                $file = $request->file('image');
+                $filename = time() . '_' . preg_replace('/[^A-Za-z0-9\-\.]/', '_', $file->getClientOriginalName());
+                $file->move(public_path('images/content'), $filename);
+                $data['image_path'] = 'images/content/' . $filename;
             }
-
-            $request->validate([
-                'image' => 'required|image|max:5120',
-            ]);
-
-            $dir = public_path('images/content');
-            if (! File::isDirectory($dir)) {
-                File::makeDirectory($dir, 0755, true);
-            }
-
-            $old = $content->image_path;
-            if ($old && str_starts_with($old, 'images/content/') && file_exists(public_path($old))) {
-                @unlink(public_path($old));
-            }
-
-            $file = $request->file('image');
-            $filename = time().'_'.preg_replace('/[^A-Za-z0-9\-\.]/', '_', $file->getClientOriginalName());
-            $file->move($dir, $filename);
-            $data['image_path'] = 'images/content/'.$filename;
         } else {
+            // Text content validation
             $request->validate([
-                'content' => 'required|string|max:15000',
+                'content' => 'required|string|max:5000',
             ]);
             $data['content'] = $request->input('content');
         }
 
-        if ($data !== []) {
-            $content->update($data);
-        }
+        $content->update($data);
 
         return redirect()->route('admin.content.index')->with('success', 'Konten berhasil diupdate');
     }
+
+
 
     /**
      * Show social media settings form
@@ -219,16 +124,16 @@ class SiteContentController extends Controller
         ];
 
         foreach ($fields as $key => $value) {
-            $row = SiteContent::where('key', $key)->first();
-
-            if ($row) {
-                $row->update(['content' => $value, 'section' => 'social_links']);
+            $content = SiteContent::where('key', $key)->first();
+            
+            if ($content) {
+                $content->update(['content' => $value]);
             } else {
                 SiteContent::create([
                     'key' => $key,
                     'content' => $value,
                     'content_type' => 'text',
-                    'section' => 'social_links',
+                    'section' => 'social',
                     'order' => 0,
                 ]);
             }

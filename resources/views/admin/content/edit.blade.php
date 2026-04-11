@@ -8,7 +8,7 @@ use App\Helpers\ContentHelper;
 
 @section('content')
 <div class="edit-header">
-    <h1>Edit: {{ $imageKeyLabel ?? $siteContent->key }}</h1>
+    <h1>Edit Konten: {{ $siteContent->key }}</h1>
     <a href="{{ route('admin.content.index') }}" class="btn btn-secondary">← Kembali</a>
 </div>
 
@@ -22,14 +22,8 @@ use App\Helpers\ContentHelper;
     </div>
 @endif
 
-@if(session('info'))
-    <div class="alert alert-info" style="margin-bottom: 1rem; padding: 0.75rem 1rem; border-radius: 0.25rem; background: #d1ecf1; color: #0c5460;">
-        {{ session('info') }}
-    </div>
-@endif
-
 <div class="form-container">
-    <form action="{{ route('admin.content.update', $siteContent) }}" method="POST" @if($siteContent->content_type === 'image') enctype="multipart/form-data" @endif>
+    <form action="{{ route('admin.content.update', $siteContent) }}" method="POST">
 
 
 
@@ -55,9 +49,9 @@ use App\Helpers\ContentHelper;
             </div>
 
             <div class="form-group">
-                <label for="image">Ganti foto (wajib pilih file untuk menyimpan perubahan)</label>
+                <label for="image">Upload Gambar Baru</label>
                 <input type="file" id="image" name="image" class="form-control" accept="image/*">
-                <small>Foto di beranda <strong>tidak bisa dihapus</strong> — hanya <strong>diganti</strong> dengan unggahan baru. JPG, PNG, WebP, maks. 5MB.</small>
+                <small>Format: JPG, PNG. Ukuran maksimal: 2MB</small>
             </div>
         @else
             <div class="form-group">
@@ -66,9 +60,6 @@ use App\Helpers\ContentHelper;
                     <textarea id="content" name="content" class="form-control" rows="6">{{ $siteContent->content }}</textarea>
                 @else
                     <input type="text" id="content" name="content" value="{{ $siteContent->content }}" class="form-control">
-                @endif
-                @if($siteContent->key === 'hero_title')
-                    <small>Anda boleh memakai HTML, misalnya <code>&lt;span class="highlight"&gt;Kata sorot&lt;/span&gt;</code> untuk teks berwarna seperti di beranda.</small>
                 @endif
             </div>
         @endif
