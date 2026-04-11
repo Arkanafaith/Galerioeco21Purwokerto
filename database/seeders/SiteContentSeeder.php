@@ -12,12 +12,12 @@ class SiteContentSeeder extends Seeder
      */
     public function run(): void
     {
-        // Hero Section
+        // Hero Section (teks)
         SiteContent::firstOrCreate(
             ['key' => 'hero_title'],
             [
-                'content_type' => 'text',
-                'content' => 'Oleh-oleh Khas Banyumas Asli!',
+                'content_type' => 'textarea',
+                'content' => 'Oleh-oleh <span class="highlight">Khas Banyumas</span> Asli!',
                 'section' => 'hero',
                 'order' => 1,
             ]
@@ -43,14 +43,54 @@ class SiteContentSeeder extends Seeder
             ]
         );
 
+        SiteContent::firstOrCreate(
+            ['key' => 'hero_cta_label'],
+            [
+                'content_type' => 'text',
+                'content' => 'Order Sekarang',
+                'section' => 'hero',
+                'order' => 4,
+            ]
+        );
+
         // Stats Section
+        SiteContent::firstOrCreate(
+            ['key' => 'stats_card1_label'],
+            [
+                'content_type' => 'text',
+                'content' => 'Berdiri',
+                'section' => 'stats',
+                'order' => 1,
+            ]
+        );
+
         SiteContent::firstOrCreate(
             ['key' => 'stats_year'],
             [
                 'content_type' => 'text',
                 'content' => '2021',
                 'section' => 'stats',
-                'order' => 1,
+                'order' => 2,
+            ]
+        );
+
+        SiteContent::firstOrCreate(
+            ['key' => 'stats_card1_unit'],
+            [
+                'content_type' => 'text',
+                'content' => 'Tahun',
+                'section' => 'stats',
+                'order' => 3,
+            ]
+        );
+
+        SiteContent::firstOrCreate(
+            ['key' => 'stats_card2_label'],
+            [
+                'content_type' => 'text',
+                'content' => 'Total Pelanggan',
+                'section' => 'stats',
+                'order' => 4,
             ]
         );
 
@@ -60,7 +100,47 @@ class SiteContentSeeder extends Seeder
                 'content_type' => 'text',
                 'content' => '100k+',
                 'section' => 'stats',
-                'order' => 2,
+                'order' => 5,
+            ]
+        );
+
+        SiteContent::firstOrCreate(
+            ['key' => 'stats_card2_unit'],
+            [
+                'content_type' => 'text',
+                'content' => 'Produk',
+                'section' => 'stats',
+                'order' => 6,
+            ]
+        );
+
+        SiteContent::firstOrCreate(
+            ['key' => 'stats_card3_label'],
+            [
+                'content_type' => 'text',
+                'content' => 'Produksi',
+                'section' => 'stats',
+                'order' => 7,
+            ]
+        );
+
+        SiteContent::firstOrCreate(
+            ['key' => 'stats_card3_value'],
+            [
+                'content_type' => 'text',
+                'content' => 'Harian',
+                'section' => 'stats',
+                'order' => 8,
+            ]
+        );
+
+        SiteContent::firstOrCreate(
+            ['key' => 'stats_card3_unit'],
+            [
+                'content_type' => 'text',
+                'content' => 'Oleh-oleh',
+                'section' => 'stats',
+                'order' => 9,
             ]
         );
 
@@ -69,9 +149,19 @@ class SiteContentSeeder extends Seeder
             ['key' => 'about_title'],
             [
                 'content_type' => 'text',
-                'content' => 'Tentang Kami',
+                'content' => 'Tentang',
                 'section' => 'about',
                 'order' => 1,
+            ]
+        );
+
+        SiteContent::firstOrCreate(
+            ['key' => 'about_title_highlight'],
+            [
+                'content_type' => 'text',
+                'content' => 'Kami',
+                'section' => 'about',
+                'order' => 2,
             ]
         );
 
@@ -81,7 +171,7 @@ class SiteContentSeeder extends Seeder
                 'content_type' => 'text',
                 'content' => 'Selamat Datang di Galeri Eco 21',
                 'section' => 'about',
-                'order' => 2,
+                'order' => 3,
             ]
         );
 
@@ -91,7 +181,7 @@ class SiteContentSeeder extends Seeder
                 'content_type' => 'textarea',
                 'content' => 'Galeri Eco21 adalah pusat oleh-oleh khas Purwokerto/Banyumas yang berlokasi di Jl. Mayjend Sutoyo No.27, Sokanegara. Tempat ini menyediakan berbagai jenis makanan khas, seperti getuk, gethuk goreng, mendoan, carang-carang, makanan khas, dan mendoan, menjadikannya destinasi belanja lengkap dan modern bagi wisatawan.',
                 'section' => 'about',
-                'order' => 3,
+                'order' => 4,
             ]
         );
 
@@ -101,7 +191,7 @@ class SiteContentSeeder extends Seeder
                 'content_type' => 'text',
                 'content' => 'Dikurasi Dengan Hati',
                 'section' => 'about',
-                'order' => 4,
+                'order' => 5,
             ]
         );
 
@@ -111,7 +201,7 @@ class SiteContentSeeder extends Seeder
                 'content_type' => 'textarea',
                 'content' => 'Hanya produk dengan standar rasa dan kebersihan terbaik yang masuk ke rak kami.',
                 'section' => 'about',
-                'order' => 5,
+                'order' => 6,
             ]
         );
 
@@ -121,7 +211,7 @@ class SiteContentSeeder extends Seeder
                 'content_type' => 'text',
                 'content' => 'Pemberdayaan Lokal',
                 'section' => 'about',
-                'order' => 6,
+                'order' => 7,
             ]
         );
 
@@ -131,11 +221,41 @@ class SiteContentSeeder extends Seeder
                 'content_type' => 'textarea',
                 'content' => 'Mendukung ekonomi warga dengan reseller langsung dari produsen pertama.',
                 'section' => 'about',
-                'order' => 7,
+                'order' => 8,
             ]
         );
 
-        // Product Advantages (Showcase Section)
+        // Showcase (accordion + judul)
+        SiteContent::firstOrCreate(
+            ['key' => 'showcase_title_part1'],
+            [
+                'content_type' => 'text',
+                'content' => 'Temukan',
+                'section' => 'showcase',
+                'order' => 1,
+            ]
+        );
+
+        SiteContent::firstOrCreate(
+            ['key' => 'showcase_title_highlight'],
+            [
+                'content_type' => 'text',
+                'content' => 'Keunggulan',
+                'section' => 'showcase',
+                'order' => 2,
+            ]
+        );
+
+        SiteContent::firstOrCreate(
+            ['key' => 'showcase_title_part2'],
+            [
+                'content_type' => 'text',
+                'content' => 'Produk Kami',
+                'section' => 'showcase',
+                'order' => 3,
+            ]
+        );
+
         SiteContent::firstOrCreate(
             ['key' => 'advantage_1_title'],
             [
@@ -196,6 +316,78 @@ class SiteContentSeeder extends Seeder
             ]
         );
 
+        // Produk (judul section di beranda)
+        SiteContent::firstOrCreate(
+            ['key' => 'products_best_badge'],
+            [
+                'content_type' => 'text',
+                'content' => 'The Best Product',
+                'section' => 'products',
+                'order' => 1,
+            ]
+        );
+
+        SiteContent::firstOrCreate(
+            ['key' => 'products_best_title'],
+            [
+                'content_type' => 'textarea',
+                'content' => "3 Produk\nTerbaik Kami",
+                'section' => 'products',
+                'order' => 2,
+            ]
+        );
+
+        SiteContent::firstOrCreate(
+            ['key' => 'products_all_badge'],
+            [
+                'content_type' => 'text',
+                'content' => 'PRODUCTS',
+                'section' => 'products',
+                'order' => 3,
+            ]
+        );
+
+        SiteContent::firstOrCreate(
+            ['key' => 'products_all_title'],
+            [
+                'content_type' => 'text',
+                'content' => 'Buah tangan khas Banyumas',
+                'section' => 'products',
+                'order' => 4,
+            ]
+        );
+
+        SiteContent::firstOrCreate(
+            ['key' => 'products_category_label'],
+            [
+                'content_type' => 'text',
+                'content' => 'Makanan Tradisional',
+                'section' => 'products',
+                'order' => 5,
+            ]
+        );
+
+        // Testimonial / ulasan di beranda
+        SiteContent::firstOrCreate(
+            ['key' => 'testimonial_form_title'],
+            [
+                'content_type' => 'text',
+                'content' => 'Tulis Ulasan Kamu',
+                'section' => 'testimonial',
+                'order' => 1,
+            ]
+        );
+
+        SiteContent::firstOrCreate(
+            ['key' => 'testimonial_form_subtitle'],
+            [
+                'content_type' => 'text',
+                'content' => 'Pendapatmu sangat berarti bagi kami.',
+                'section' => 'testimonial',
+                'order' => 2,
+            ]
+        );
+
         // CTA Section
         SiteContent::firstOrCreate(
             ['key' => 'cta_title'],
@@ -217,58 +409,79 @@ class SiteContentSeeder extends Seeder
             ]
         );
 
-        // Hero Image
         SiteContent::firstOrCreate(
-            ['key' => 'hero_image'],
+            ['key' => 'cta_whatsapp_link'],
             [
-                'content_type' => 'image',
-                'image_path' => 'images/toko/foto_depan_toko.jpg',
-                'section' => 'hero',
+                'content_type' => 'text',
+                'content' => 'https://wa.me/628112648830?text=Halo%20Galeri%20Eco%2021',
+                'section' => 'cta',
+                'order' => 3,
+            ]
+        );
+
+        SiteContent::firstOrCreate(
+            ['key' => 'cta_tokopedia_link'],
+            [
+                'content_type' => 'text',
+                'content' => 'https://www.tokopedia.com/tokoeco21',
+                'section' => 'cta',
                 'order' => 4,
             ]
         );
 
-        // About Images
+        // Ikuti kami (teks saja; link tetap dari Pengaturan Media Sosial)
         SiteContent::firstOrCreate(
-            ['key' => 'about_image_1'],
+            ['key' => 'follow_section_heading'],
             [
-                'content_type' => 'image',
-                'image_path' => 'images/toko/foto1.jpg',
-                'section' => 'about',
-                'order' => 8,
-            ]
-        );
-
-        SiteContent::firstOrCreate(
-            ['key' => 'about_image_2'],
-            [
-                'content_type' => 'image',
-                'image_path' => 'images/toko/foto2.jpg',
-                'section' => 'about',
-                'order' => 9,
-            ]
-        );
-
-        // Showcase Image
-        SiteContent::firstOrCreate(
-            ['key' => 'showcase_image'],
-            [
-                'content_type' => 'image',
-                'image_path' => 'images/toko/foto4.jpg',
-                'section' => 'showcase',
+                'content_type' => 'textarea',
+                'content' => 'Ikuti Eco 21 dan dapatkan update produk terbaru.',
+                'section' => 'follow',
                 'order' => 1,
             ]
         );
 
-        // Social Follow Image
-        SiteContent::firstOrCreate(
-            ['key' => 'social_follow_image'],
-            [
-                'content_type' => 'image',
-                'image_path' => 'images/toko/foto_depan_toko.jpg',
-                'section' => 'social',
-                'order' => 1,
-            ]
-        );
+        // Gambar beranda (satu section untuk admin — menggantikan daftar link social di Kelola Konten)
+        $order = 1;
+        foreach ([
+            'hero_image' => 'images/toko/foto_depan_toko.jpg',
+            'about_image_1' => 'images/toko/foto1.jpg',
+            'about_image_2' => 'images/toko/foto2.jpg',
+            'showcase_image' => 'images/toko/foto4.jpg',
+            'social_follow_image' => 'images/toko/foto_depan_toko.jpg',
+            'testimonial_image' => 'images/toko/foto6.png',
+        ] as $key => $path) {
+            SiteContent::firstOrCreate(
+                ['key' => $key],
+                [
+                    'content_type' => 'image',
+                    'image_path' => $path,
+                    'section' => 'gambar_beranda',
+                    'order' => $order++,
+                ]
+            );
+        }
+
+        // Link sosial (hanya lewat admin/settings/social — tidak tampil di Kelola Konten)
+        $socialDefaults = [
+            'social_tiktok_link' => 'https://www.tiktok.com',
+            'social_whatsapp_link' => 'https://wa.me/6281234567890',
+            'social_tokopedia_link' => 'https://www.tokopedia.com',
+            'social_instagram_link' => 'https://www.instagram.com',
+            'social_linkedin_link' => 'https://www.linkedin.com',
+            'social_shopee_link' => 'https://shopee.co.id',
+            'social_google_maps_link' => 'https://maps.app.goo.gl/oCyAwKJt9XZQbJaHA',
+        ];
+        $sOrder = 1;
+        foreach ($socialDefaults as $key => $url) {
+            SiteContent::firstOrCreate(
+                ['key' => $key],
+                [
+                    'content_type' => 'text',
+                    'content' => $url,
+                    'section' => 'social_links',
+                    'order' => $sOrder++,
+                ]
+            );
+        }
     }
 }

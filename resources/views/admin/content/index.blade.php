@@ -4,12 +4,23 @@
 
 @section('content')
 <div class="admin-header">
-    <h1>📝 Kelola Konten Website (Edit Only)</h1>
+    <h1>📝 Kelola Konten Website</h1>
 </div>
+
+<p class="alert alert-info" style="margin-bottom: 1.5rem;">
+    Edit teks seluruh beranda di bawah. Semua <strong>gambar beranda</strong> dikelola di section <strong>Gambar beranda</strong>.
+    Link TikTok, WhatsApp, Tokopedia, dll. tetap di menu <strong>Pengaturan → Media Sosial</strong>.
+</p>
 
 @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
+    </div>
+@endif
+
+@if(session('info'))
+    <div class="alert alert-info">
+        {{ session('info') }}
     </div>
 @endif
 
@@ -25,7 +36,7 @@
     @foreach($sections as $section)
         @if(isset($contents[$section]) && count($contents[$section]) > 0)
             <div class="content-section">
-                <h2>{{ ucfirst(str_replace('_', ' ', $section)) }}</h2>
+                <h2>{{ $sectionLabels[$section] ?? ucfirst(str_replace('_', ' ', $section)) }}</h2>
                 
                 <div class="content-list">
                     <table class="table">
@@ -51,7 +62,7 @@
                                     <td>
                                         @if($content->content_type === 'image')
                                             @if($content->image_path)
-                                                <img src="{{ asset($content->image_path) }}" alt="{{ $content->key }}" style="max-height: 50px; max-width: 100px;">
+                                                <img src="{{ asset($content->image_path) }}" alt="{{ $content->key }}" style="max-height: 72px; max-width: 120px; object-fit: cover; border-radius: 6px;">
                                             @else
                                                 <span class="text-muted">Tidak ada gambar</span>
                                             @endif
@@ -60,7 +71,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.content.edit', $content) }}" class="btn btn-sm btn-warning">✏️ Edit</a>
+                                        <a href="{{ route('admin.content.edit', $content) }}" class="btn btn-sm btn-primary">✏️ Edit</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -205,6 +216,22 @@
         color: #721c24;
         background-color: #f8d7da;
         border-color: #f5c6cb;
+    }
+
+    .alert-info {
+        color: #0c5460;
+        background-color: #d1ecf1;
+        border-color: #bee5eb;
+    }
+
+    .btn-primary {
+        background-color: #6f42c1;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #5a32a3;
+        color: white;
     }
 
     .text-muted {

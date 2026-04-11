@@ -22,8 +22,14 @@ use App\Helpers\ContentHelper;
     </div>
 @endif
 
+@if(session('info'))
+    <div class="alert alert-info" style="margin-bottom: 1rem; padding: 0.75rem 1rem; border-radius: 0.25rem; background: #d1ecf1; color: #0c5460;">
+        {{ session('info') }}
+    </div>
+@endif
+
 <div class="form-container">
-    <form action="{{ route('admin.content.update', $siteContent) }}" method="POST">
+    <form action="{{ route('admin.content.update', $siteContent) }}" method="POST" @if($siteContent->content_type === 'image') enctype="multipart/form-data" @endif>
 
 
 
@@ -51,7 +57,7 @@ use App\Helpers\ContentHelper;
             <div class="form-group">
                 <label for="image">Upload Gambar Baru</label>
                 <input type="file" id="image" name="image" class="form-control" accept="image/*">
-                <small>Format: JPG, PNG. Ukuran maksimal: 2MB</small>
+                <small>Format: JPG, PNG, WebP. Maksimal 5MB. Kosongkan jika tidak ingin mengganti gambar.</small>
             </div>
         @else
             <div class="form-group">
@@ -60,6 +66,9 @@ use App\Helpers\ContentHelper;
                     <textarea id="content" name="content" class="form-control" rows="6">{{ $siteContent->content }}</textarea>
                 @else
                     <input type="text" id="content" name="content" value="{{ $siteContent->content }}" class="form-control">
+                @endif
+                @if($siteContent->key === 'hero_title')
+                    <small>Anda boleh memakai HTML, misalnya <code>&lt;span class="highlight"&gt;Kata sorot&lt;/span&gt;</code> untuk teks berwarna seperti di beranda.</small>
                 @endif
             </div>
         @endif

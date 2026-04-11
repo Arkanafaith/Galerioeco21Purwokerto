@@ -5,25 +5,64 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\SiteContent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class SiteContentController extends Controller
 {
+    /** Urutan tampilan di Kelola Konten (link sosial dikecualikan). */
+    private const SECTION_ORDER = [
+        'hero',
+        'stats',
+        'about',
+        'showcase',
+        'advantages',
+        'products',
+        'testimonial',
+        'cta',
+        'follow',
+        'gambar_beranda',
+    ];
+
+    /** Judul section ramah untuk admin */
+    private const SECTION_LABELS = [
+        'hero' => 'Hero (atas beranda)',
+        'stats' => 'Statistik',
+        'about' => 'Tentang kami',
+        'showcase' => 'Showcase / keunggulan',
+        'advantages' => 'Accordion keunggulan produk',
+        'products' => 'Judul section produk',
+        'testimonial' => 'Form ulasan beranda',
+        'cta' => 'Ajakan hubungi (CTA)',
+        'follow' => 'Section ikuti kami (teks)',
+        'gambar_beranda' => 'Gambar beranda',
+    ];
+
     /**
      * Display all site content organized by sections
      */
     public function index()
     {
-        $sections = SiteContent::distinct()->pluck('section')->sort();
+        $rawSections = SiteContent::query()
+            ->where('section', '!=', 'social_links')
+            ->distinct()
+            ->pluck('section')
+            ->filter()
+            ->values();
+
+        $sections = $rawSections->sortBy(function ($section) {
+            $idx = array_search($section, self::SECTION_ORDER, true);
+
+            return $idx !== false ? $idx : 100;
+        })->values();
+
         $contents = [];
-        
         foreach ($sections as $section) {
             $contents[$section] = SiteContent::getBySection($section);
         }
-        
-        // Force fresh data from database
-        \DB::enableQueryLog();
-        
-        return view('admin.content.index', compact('contents', 'sections'));
+
+        $sectionLabels = self::SECTION_LABELS;
+
+        return view('admin.content.index', compact('contents', 'sections', 'sectionLabels'));
     }
 
     /**
@@ -49,38 +88,44 @@ class SiteContentController extends Controller
     {
         $data = [];
 
-        // Validate based on content type
         if ($content->content_type === 'image') {
             if ($request->hasFile('image')) {
                 $request->validate([
-                    'image' => 'required|image|max:2048',
+                    'image' => 'required|image|max:5120',
                 ]);
-                
-                // Delete old image if exists
-                if ($content->image_path && file_exists(public_path($content->image_path))) {
-                    @unlink(public_path($content->image_path));
+
+                $dir = public_path('images/content');
+                if (! File::isDirectory($dir)) {
+                    File::makeDirectory($dir, 0755, true);
                 }
 
-                // Upload new image
+                $old = $content->image_path;
+                if ($old && str_starts_with($old, 'images/content/') && file_exists(public_path($old))) {
+                    @unlink(public_path($old));
+                }
+
                 $file = $request->file('image');
-                $filename = time() . '_' . preg_replace('/[^A-Za-z0-9\-\.]/', '_', $file->getClientOriginalName());
-                $file->move(public_path('images/content'), $filename);
-                $data['image_path'] = 'images/content/' . $filename;
+                $filename = time().'_'.preg_replace('/[^A-Za-z0-9\-\.]/', '_', $file->getClientOriginalName());
+                $file->move($dir, $filename);
+                $data['image_path'] = 'images/content/'.$filename;
+            } else {
+                return redirect()
+                    ->route('admin.content.edit', $content)
+                    ->with('info', 'Gambar tidak diubah — pilih file baru untuk mengganti gambar.');
             }
         } else {
-            // Text content validation
             $request->validate([
-                'content' => 'required|string|max:5000',
+                'content' => 'required|string|max:15000',
             ]);
             $data['content'] = $request->input('content');
         }
 
-        $content->update($data);
+        if ($data !== []) {
+            $content->update($data);
+        }
 
         return redirect()->route('admin.content.index')->with('success', 'Konten berhasil diupdate');
     }
-
-
 
     /**
      * Show social media settings form
@@ -124,16 +169,16 @@ class SiteContentController extends Controller
         ];
 
         foreach ($fields as $key => $value) {
-            $content = SiteContent::where('key', $key)->first();
-            
-            if ($content) {
-                $content->update(['content' => $value]);
+            $row = SiteContent::where('key', $key)->first();
+
+            if ($row) {
+                $row->update(['content' => $value, 'section' => 'social_links']);
             } else {
                 SiteContent::create([
                     'key' => $key,
                     'content' => $value,
                     'content_type' => 'text',
-                    'section' => 'social',
+                    'section' => 'social_links',
                     'order' => 0,
                 ]);
             }

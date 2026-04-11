@@ -13,11 +13,11 @@ $products = \App\Models\Product::all();
 <section class="hero">
     <div class="container">
         <div class="hero-content">
-            <h1>{!! str_replace('<br>', '<br>', nl2br(e(ContentHelper::get('hero_title', 'Oleh-oleh <span class="highlight">Khas Banyumas</span> Asli!')))) !!}</h1>
+            <h1>{!! nl2br(ContentHelper::get('hero_title', 'Oleh-oleh <span class="highlight">Khas Banyumas</span> Asli!')) !!}</h1>
             <p>{{ ContentHelper::get('hero_subtitle', 'Nikmati kelezatan khas Banyumas, langsung dari UMKM lokal kepercayaan Anda') }}</p>
             
             <a href="#produk" class="btn-primary">
-                Order Sekarang
+                {{ ContentHelper::get('hero_cta_label', 'Order Sekarang') }}
                 <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                 </svg>
@@ -46,21 +46,21 @@ $products = \App\Models\Product::all();
     <div class="container">
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="label">Berdiri</div>
+                <div class="label">{{ ContentHelper::get('stats_card1_label', 'Berdiri') }}</div>
                 <div class="value">{{ ContentHelper::get('stats_year', '2021') }}</div>
-                <div class="unit">Tahun</div>
+                <div class="unit">{{ ContentHelper::get('stats_card1_unit', 'Tahun') }}</div>
             </div>
             
             <div class="stat-card">
-                <div class="label">Total Pelanggan</div>
+                <div class="label">{{ ContentHelper::get('stats_card2_label', 'Total Pelanggan') }}</div>
                 <div class="value">{{ ContentHelper::get('stats_customers', '100k+') }}</div>
-                <div class="unit">Produk</div>
+                <div class="unit">{{ ContentHelper::get('stats_card2_unit', 'Produk') }}</div>
             </div>
             
             <div class="stat-card">
-                <div class="label">Produksi</div>
-                <div class="value">Harian</div>
-                <div class="unit">Oleh-oleh</div>
+                <div class="label">{{ ContentHelper::get('stats_card3_label', 'Produksi') }}</div>
+                <div class="value">{{ ContentHelper::get('stats_card3_value', 'Harian') }}</div>
+                <div class="unit">{{ ContentHelper::get('stats_card3_unit', 'Oleh-oleh') }}</div>
             </div>
         </div>
     </div>
@@ -70,7 +70,7 @@ $products = \App\Models\Product::all();
 <section class="about" id="tentang">
     <div class="container">
         <div class="about-content">
-            <h2>{{ ContentHelper::get('about_title', 'Tentang') }} <span class="highlight">Kami</span></h2>
+            <h2>{{ ContentHelper::get('about_title', 'Tentang') }} <span class="highlight">{{ ContentHelper::get('about_title_highlight', 'Kami') }}</span></h2>
             <p class="subtitle">{{ ContentHelper::get('about_subtitle', 'Selamat Datang di Galeri Eco 21') }}</p>
             
             <p>{{ ContentHelper::get('about_description', 'Galeri Eco21 adalah pusat oleh-oleh khas Purwokerto/Banyumas yang berlokasi di Jl. Mayjend Sutoyo No.27, Sokanegara. Tempat ini menyediakan berbagai jenis makanan khas, seperti getuk, gethuk goreng, mendoan, carang-carang, makanan khas, dan mendoan, menjadikannya destinasi belanja lengkap dan modern bagi wisatawan.') }}</p>
@@ -124,7 +124,7 @@ $products = \App\Models\Product::all();
         </div>
         
         <div class="showcase-content">
-            <h2 class="showcase-title">Temukan <span class="highlight-yellow">Keunggulan</span><br>Produk Kami</h2>
+            <h2 class="showcase-title">{{ ContentHelper::get('showcase_title_part1', 'Temukan') }} <span class="highlight-yellow">{{ ContentHelper::get('showcase_title_highlight', 'Keunggulan') }}</span><br>{{ ContentHelper::get('showcase_title_part2', 'Produk Kami') }}</h2>
             
             <div class="accordion-container">
                 <div class="accordion-item">
@@ -176,8 +176,8 @@ $products = \App\Models\Product::all();
 <!-- Best Products Section -->
 <section class="best-products" id="produk">
     <div class="container">
-        <span class="section-badge">The Best Product</span>
-        <h2 class="section-title">3 Produk<br>Terbaik Kami</h2>
+        <span class="section-badge">{{ ContentHelper::get('products_best_badge', 'The Best Product') }}</span>
+        <h2 class="section-title">{!! nl2br(e(ContentHelper::get('products_best_title', "3 Produk\nTerbaik Kami"))) !!}</h2>
         
         <div class="products-grid">
             @foreach($topProducts as $product)
@@ -190,7 +190,7 @@ $products = \App\Models\Product::all();
                         @endif
                     </div>
                     <div class="product-info">
-                        <div class="product-category">Makanan Tradisional</div>
+                        <div class="product-category">{{ ContentHelper::get('products_category_label', 'Makanan Tradisional') }}</div>
                         <h3 class="product-name">{{ $product->name }}</h3>
                         <div class="product-rating">
                             <span class="stars">★★★★★</span>
@@ -206,8 +206,8 @@ $products = \App\Models\Product::all();
 <!-- All Products Section -->
 <section class="all-products">
     <div class="container">
-        <span class="section-badge">PRODUCTS</span>
-        <h2 class="section-title">Buah tangan khas Banyumas</h2>
+        <span class="section-badge">{{ ContentHelper::get('products_all_badge', 'PRODUCTS') }}</span>
+        <h2 class="section-title">{{ ContentHelper::get('products_all_title', 'Buah tangan khas Banyumas') }}</h2>
         
         <div class="products-grid-4" id="allProductsGrid">
             @forelse($products as $product)
@@ -379,8 +379,8 @@ $products = \App\Models\Product::all();
         <div class="testimonial-grid">
             <!-- Form Ulasan -->
             <div class="testimonial-form-card">
-                <h2>Tulis Ulasan Kamu</h2>
-                <p>Pendapatmu sangat berarti bagi kami.</p>
+                <h2>{{ ContentHelper::get('testimonial_form_title', 'Tulis Ulasan Kamu') }}</h2>
+                <p>{{ ContentHelper::get('testimonial_form_subtitle', 'Pendapatmu sangat berarti bagi kami.') }}</p>
                 
                 <form action="#" method="POST">
                     <div class="form-row">
@@ -422,7 +422,7 @@ $products = \App\Models\Product::all();
             
             <!-- Image Display -->
             <div class="testimonial-image">
-                <img src="{{ asset('images/toko/foto6.png') }}" alt="Display Produk">
+                <img src="{{ ContentHelper::getImage('testimonial_image', asset('images/toko/foto6.png')) }}" alt="Display Produk">
             </div>
         </div>
     </div>
@@ -436,7 +436,7 @@ $products = \App\Models\Product::all();
             <p>{{ ContentHelper::get('cta_subtitle', 'Kami punya pilihan istimewa untuk dibawa pulang.') }}</p>
             
             <div class="cta-buttons">
-                <a href="https://wa.me/628112648830?text=Halo%20Galeri%20Eco%2021" target="_blank" class="btn-whatsapp">
+                <a href="{{ ContentHelper::get('cta_whatsapp_link', 'https://wa.me/628112648830?text=Halo%20Galeri%20Eco%2021') }}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
                     <img class="btn-icon" src="{{ asset('images/icon/whatsapp.png') }}" alt="WhatsApp">
                     WhatsApp
                 </a>
@@ -444,7 +444,7 @@ $products = \App\Models\Product::all();
                     <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 6h-2c0-2.21-1.79-4-4-4s-4 1.79-4 4H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-8 0c0-1.1.9-2 2-2s2 .9 2 2h-4zm6 14H6V8h2v2c0 .55.45 1 1 1s1-.45 1-1V8h8v12z"/></svg>
                     Shopee
                 </a>
-                <a href="https://www.tokopedia.com/tokoeco21" target="_blank" class="btn-tokopedia">
+                <a href="{{ ContentHelper::get('cta_tokopedia_link', 'https://www.tokopedia.com/tokoeco21') }}" target="_blank" rel="noopener noreferrer" class="btn-tokopedia">
                     <img class="btn-icon" src="{{ asset('images/icon/tokopedia.png') }}" alt="Tokopedia">
                     Tokopedia
                 </a>
@@ -458,7 +458,7 @@ $products = \App\Models\Product::all();
     <div class="container">
         <div class="follow-content">
             <div class="follow-text">
-                <h2>Ikuti Eco 21 dan dapatkan update produk terbaru.</h2>
+                <h2>{!! nl2br(e(ContentHelper::get('follow_section_heading', 'Ikuti Eco 21 dan dapatkan update produk terbaru.'))) !!}</h2>
                 <div class="follow-icons">
                     <a href="{{ ContentHelper::get('social_tiktok_link', 'https://www.tiktok.com') }}" target="_blank" class="follow-icon follow-icon-tiktok" title="TikTok">
                         <img src="{{ asset('images/icon/tiktok.png') }}" alt="TikTok">
